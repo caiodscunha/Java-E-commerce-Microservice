@@ -3,6 +3,7 @@ package br.com.dio.warehouse.service;
 import br.com.dio.warehouse.dto.StockStatusMessage;
 import br.com.dio.warehouse.entity.StockEntity;
 import br.com.dio.warehouse.entity.StockStatus;
+import org.springframework.context.annotation.Bean;
 
 import java.util.UUID;
 

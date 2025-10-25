@@ -31,6 +31,10 @@ public class StockEntity {
 
     private BigDecimal soldPrice;
 
+    public boolean isUnavailable(){
+        return status == UNAVAILABLE;
+    }
+
     public void decAmount(){
         this.ammount -= 1;
         if(this.ammount == 0){

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import static jakarta.persistence.CascadeType.ALL;
@@ -28,14 +29,23 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product", cascade = ALL)
     private Set<StockEntity> stocks = new HashSet<>();
 
-    public StockEntity decStock(){
-        var stock = this.stocks.stream()
+    private StockEntity getStockWithMinSoldPrice() {
+        return stocks.stream()
                 .filter(s -> s.getStatus().equals(AVAILABLE))
                 .min(Comparator.comparing(StockEntity::getSoldPrice))
                 .orElseThrow();
+    }
+
+    public StockEntity decStock(){
+        var stock = getStockWithMinSoldPrice();
 
         stock.decAmount();
         return stock;
+    }
+
+    public BigDecimal getPrice(){
+        return getStockWithMinSoldPrice()
+                .getSoldPrice();
     }
 
     @PrePersist
