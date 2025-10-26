@@ -3,6 +3,7 @@ package br.com.dio.warehouse.service.impl;
 import br.com.dio.warehouse.dto.ProductStorefrontSaveDTO;
 import br.com.dio.warehouse.entity.ProductEntity;
 import br.com.dio.warehouse.repository.ProductRepository;
+import br.com.dio.warehouse.service.IProductQueryService;
 import br.com.dio.warehouse.service.IProductService;
 import br.com.dio.warehouse.service.IStockService;
 import br.com.dio.warehouse.service.mapper.IProductMapper;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class ProductServiceImpl implements IProductService {
 
     private final ProductRepository repository;
+    private final IProductQueryService queryService;
     private final IStockService stockService;
     private final RestClient storefrontClient;
     private final IProductMapper mapper;
@@ -38,13 +40,8 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public ProductEntity findById(UUID id) {
-        return repository.findById(id).orElseThrow();
-    }
-
-    @Override
     public void purchase(UUID id) {
-        var entity = findById(id);
+        var entity = queryService.findById(id);
         var stock = entity.decStock();
         repository.save(entity);
 

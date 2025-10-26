@@ -56,11 +56,11 @@ public class StockEntity {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         StockEntity that = (StockEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(ammount, that.ammount) && Objects.equals(boughtPrice, that.boughtPrice) && stockStatus == that.stockStatus && Objects.equals(soldPrice, that.soldPrice);
+        return Objects.equals(id, that.id) && Objects.equals(ammount, that.ammount) && Objects.equals(boughtPrice, that.boughtPrice) && status == that.status && Objects.equals(soldPrice, that.soldPrice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ammount, boughtPrice, stockStatus, soldPrice);
+        return Objects.hash(id, ammount, boughtPrice, status, soldPrice);
     }
 }

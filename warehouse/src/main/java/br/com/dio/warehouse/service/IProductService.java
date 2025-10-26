@@ -8,7 +8,5 @@ public interface IProductService {
 
     ProductEntity save(final ProductEntity product);
 
-    ProductEntity findById(final UUID id);
-
     void purchase(final UUID id);
 }

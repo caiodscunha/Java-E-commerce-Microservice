@@ -5,7 +5,7 @@ import br.com.dio.warehouse.entity.StockEntity;
 import br.com.dio.warehouse.entity.StockStatus;
 import br.com.dio.warehouse.repository.StockRepository;
 import br.com.dio.warehouse.service.IProductChangeAvaliabilityProducer;
-import br.com.dio.warehouse.service.IProductService;
+import br.com.dio.warehouse.service.IProductQueryService;
 import br.com.dio.warehouse.service.IStockService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,12 +20,12 @@ import static br.com.dio.warehouse.entity.StockStatus.UNAVAILABLE;
 public class StockServiceImpl implements IStockService {
 
     private final StockRepository repository;
-    private final IProductService productService;
+    private final IProductQueryService productQueryService;
     private final IProductChangeAvaliabilityProducer producer;
 
     @Override
     public StockEntity save(StockEntity entity) {
-        entity.setProduct(productService.findById(entity.getProduct().getId()));
+        entity.setProduct(productQueryService.findById(entity.getProduct().getId()));
 
         return repository.save(entity);
     }
